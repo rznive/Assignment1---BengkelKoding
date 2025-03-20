@@ -18,7 +18,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nama',
+        'alamat',
+        'no_hp',
+        'role',
         'email',
         'password',
     ];
@@ -45,4 +48,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+   
+    public function periksa_pasien():hasMany
+    {
+        return $this->hasMany(Periksa::class, 'id_dokter', localKey: 'id');
+    }
+
+    public function periksa_dokter():hasMany
+    {
+        return $this->hasMany(Periksa::class, 'id_dokter', localKey: 'id');
+    }
+
+    
 }
