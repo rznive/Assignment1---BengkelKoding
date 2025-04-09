@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -50,15 +51,14 @@ class User extends Authenticatable
     }
 
    
-    public function periksa_pasien():hasMany
+    public function periksa_pasien():HasMany
     {
         return $this->hasMany(Periksa::class, 'id_dokter', localKey: 'id');
     }
 
-    public function periksa_dokter():hasMany
+    public function periksa_dokter():HasMany
     {
         return $this->hasMany(Periksa::class, 'id_dokter', localKey: 'id');
     }
-
     
 }
