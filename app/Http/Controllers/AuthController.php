@@ -22,8 +22,10 @@ class AuthController extends Controller
         // Attempt to log the user in
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role == 'dokter') {
+                toastr()->success('Selamat datang, dr. ' . Auth::user()->nama);
                 return redirect()->route('dashboardDokter');
             } elseif (Auth::user()->role == 'pasien') {
+                toastr()->success('Selamat datang, ' . Auth::user()->nama);
                 return redirect()->route('dashboardPasien');
             }else {
                 return abort(403, 'Unauthorized action.');

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pasien')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('id_dokter')->constrained()->onDelete('cascade');
-            $table->dateTime('tgl_periksa');
-            $table->longText('catatan');
-            $table->bigInteger('biaya_periksa');
+            $table->dateTime('tgl_periksa')->nullable();
+            $table->longText('catatan')->nullable();
+            $table->bigInteger('biaya_periksa')->nullable();
             $table->timestamps();
         });
     }

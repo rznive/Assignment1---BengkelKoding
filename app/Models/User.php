@@ -53,7 +53,7 @@ class User extends Authenticatable
    
     public function periksa_pasien():HasMany
     {
-        return $this->hasMany(Periksa::class, 'id_dokter', localKey: 'id');
+        return $this->hasMany(Periksa::class, 'id_pasien', localKey: 'id');
     }
 
     public function periksa_dokter():HasMany
