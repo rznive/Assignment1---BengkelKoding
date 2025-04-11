@@ -20,6 +20,29 @@ class DokterController extends Controller
         return view('dokter.periksa', compact('periksa', 'obats'));
     }
 
+    public function updatePeriksa(Request $request, $id)
+    {
+        $request->validate([
+            'tgl_periksa' => 'required|date',
+            'catatan' => 'nullable|string',
+            'biaya_periksa' => 'required|integer',
+        ]);
+
+        $periksa = Periksa::findOrFail($id);
+        if ($periksa->id_dokter !== auth()->id()) {
+            abort(403);
+        }
+
+        $periksa->update([
+            'tgl_periksa' => $request->tgl_periksa,
+            'catatan' => $request->catatan,
+            'biaya_periksa' => $request->biaya_periksa,
+        ]);
+
+        toastr()->success('Data Periksa Pasien berhasil diperbarui!');
+        return redirect()->route('periksaDokter');
+    }
+    
     public function showObat()
     {
 
@@ -63,26 +86,4 @@ class DokterController extends Controller
         return redirect()->route('obatDokter');
     }
 
-    public function updatePeriksa(Request $request, $id)
-    {
-        $request->validate([
-            'tgl_periksa' => 'required|date',
-            'catatan' => 'nullable|string',
-            'biaya_periksa' => 'required|integer',
-        ]);
-
-        $periksa = Periksa::findOrFail($id);
-        if ($periksa->id_dokter !== auth()->id()) {
-            abort(403);
-        }
-
-        $periksa->update([
-            'tgl_periksa' => $request->tgl_periksa,
-            'catatan' => $request->catatan,
-            'biaya_periksa' => $request->biaya_periksa,
-        ]);
-
-        toastr()->success('Data Periksa Pasien berhasil diperbarui!');
-        return redirect()->route('periksaDokter');
-    }
 }

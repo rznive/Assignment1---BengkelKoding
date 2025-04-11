@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Periksa;
 use App\Models\User;
 use Illuminate\Http\Request;
