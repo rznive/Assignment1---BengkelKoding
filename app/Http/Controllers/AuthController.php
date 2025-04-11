@@ -69,4 +69,12 @@ class AuthController extends Controller
        toastr()->success('Pendaftaran berhasil, silakan login');
         return redirect()->route('login');
     }
+
+    public function logout()
+    {
+        $userName = Auth::user()->nama;
+        Auth::logout();
+        toastr()->success('Selamat tinggal, ' . $userName);
+        return redirect()->route('login');
+    }
 }

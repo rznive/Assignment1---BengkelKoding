@@ -41,6 +41,28 @@ class DokterController extends Controller
         return redirect()->route('obatDokter');
     }
 
+    public function updateObat(Request $request, $id)
+    {
+        $request->validate([
+            'nama_obat' => 'required|string|max:255',
+            'kemasan' => 'required|string|max:69',
+            'harga' => 'required|integer',
+        ]);
+
+        $obat = Obat::findOrFail($id);
+        $obat->update($request->all());
+        toastr()->success('Obat Berhasil Diperbarui');
+        return redirect()->route('obatDokter');
+    }
+
+    public function deleteObat($id)
+    {
+        $obat = Obat::findOrFail($id);
+        $obat->delete();
+        toastr()->success('Obat Berhasil Dihapus');
+        return redirect()->route('obatDokter');
+    }
+
     public function updatePeriksa(Request $request, $id)
     {
         $request->validate([

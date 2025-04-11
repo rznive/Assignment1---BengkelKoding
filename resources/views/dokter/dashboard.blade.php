@@ -23,12 +23,22 @@
     </li>
     <li class="nav-item">
       <a href="{{ route('obatDokter') }}" class="nav-link">
-        <i class="nav-icon fas fa-history"></i>
+        <i class="nav-icon fas fa-vials"></i>
         <p>
           Obat
           <span class="right badge badge-danger">New</span>
         </p>
       </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="nav-icon fas fa-lock"></i>
+        <p>Logout</p>
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+      </form>
     </li>
   </ul>
 </nav>

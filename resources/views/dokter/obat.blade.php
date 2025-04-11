@@ -23,12 +23,22 @@
     </li>
     <li class="nav-item">
       <a href="{{ route('obatDokter') }}" class="nav-link active">
-        <i class="nav-icon fas fa-history"></i>
+        <i class="nav-icon fas fa-vials"></i>
         <p>
           Obat
           <span class="right badge badge-danger">New</span>
         </p>
       </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="nav-icon fas fa-lock"></i>
+        <p>Logout</p>
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+      </form>
     </li>
   </ul>
 </nav>
@@ -126,8 +136,24 @@
                     <td>{{ $obat->kemasan }}</td>
                     <td>Rp. {{ number_format($obat->harga, 0, ',','.') }}</td>
                     <td>
-                      <button class="btn btn-warning">Edit</button>
-                      <button class="btn btn-danger">Delete</button>
+                      <button
+                        class="btn btn-warning"
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        data-id="{{ $obat->id }}"
+                        data-nama="{{ $obat->nama_obat }}"
+                        data-kemasan="{{ $obat->kemasan }}"
+                        data-harga="{{ $obat->harga }}">
+                        Edit
+                      </button>
+
+                      <button
+                        class="btn btn-danger btn-delete"
+                        data-id="{{ $obat->id }}"
+                        data-nama="{{ $obat->nama_obat }}">
+                        Delete
+                      </button>
+
                     </td>
                   </tr>
                   @endforeach
@@ -143,5 +169,79 @@
   </section>
   <!-- /.content -->
 </div>
+<!-- Modal Edit Obat -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action="" id="formEditObat">
+      @csrf
+      @method('PUT')
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Obat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama</label>
+            <input type="text" id="nama" name="nama_obat" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Kemasan</label>
+            <input type="text" name="kemasan" id="kemasan" class="form-control"></input>
+          </div>
+          <div class="form-group">
+            <label>Harga</label>
+            <input type="number" id="harga" name="harga" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    $('#editModal').on('show.bs.modal', function(event) {
+      const button = $(event.relatedTarget);
+      const id = button.data('id');
+      const nama = button.data('nama');
+      const kemasan = button.data('kemasan');
+      const harga = button.data('harga');
+
+      const modal = $(this);
+      modal.find('#nama').val(nama);
+      modal.find('#kemasan').val(kemasan);
+      modal.find('#harga').val(harga);
+
+      // Update action URL
+      const actionUrl = '/dokter/obat/' + id;
+      modal.find('#formEditObat').attr('action', actionUrl);
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    $(document).on('click', '.btn-delete', function () {
+      const id = $(this).data('id');
+
+      const form = $('<form>', {
+        method: 'POST',
+        action: `/dokter/obat/${id}`
+      });
+
+      form.append('<input type="hidden" name="_token" value="{{ csrf_token() }}">');
+      form.append('<input type="hidden" name="_method" value="DELETE">');
+
+      $('body').append(form);
+      form.submit();
+    });
+  });
+</script>
+
 <!-- /.content-wrapper -->
 @include ('layout.footer')

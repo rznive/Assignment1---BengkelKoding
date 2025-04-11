@@ -21,6 +21,16 @@
         </p>
       </a>
     </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="nav-icon fas fa-lock"></i>
+        <p>Logout</p>
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+      </form>
+    </li>
   </ul>
 </nav>
 <!-- /.sidebar-menu -->
@@ -116,7 +126,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>dr. {{ $item->dokter->nama }}</td>
                     <td>{{ $item->tgl_periksa ? $item->tgl_periksa: 'N/A' }}</td>
-                    <td>{{ $item->biaya_periksa ? 'Rp. '.number_format($item->biaya_periksa, 2): '  N/A' }}</td>
+                    <td>{{ $item->biaya_periksa ? 'Rp. '.number_format($item->biaya_periksa, 0, ',','.'): '  N/A' }}</td>
                     <td>
                       <span class="badge {{ $item->tgl_periksa ? 'badge-success' : 'badge-warning' }}">
                         {{ $item->tgl_periksa ? 'Sudah Ditangani' : 'Menunggu Pemeriksaan' }}

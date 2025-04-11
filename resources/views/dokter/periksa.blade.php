@@ -23,12 +23,22 @@
     </li>
     <li class="nav-item">
       <a href="{{ route('obatDokter') }}" class="nav-link">
-        <i class="nav-icon fas fa-history"></i>
+        <i class="nav-icon fas fa-vials"></i>
         <p>
           Obat
           <span class="right badge badge-danger">New</span>
         </p>
       </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="nav-icon fas fa-lock"></i>
+        <p>Logout</p>
+      </a>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+      </form>
     </li>
   </ul>
 </nav>
@@ -169,7 +179,8 @@
 
           <div class="form-group">
             <label>Biaya Periksa</label>
-            <input type="number" name="biaya_periksa" id="biaya_periksa" class="form-control">
+            <input type="text" id="biaya_periksa_view" value="Rp. 150.000" class="form-control" readonly>
+            <input type="hidden" name="biaya_periksa" id="biaya_periksa">
           </div>
         </div>
         <div class="modal-footer">
@@ -182,7 +193,15 @@
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Saat modal ditampilkan
+    let hargaAwal = 150000;
+    let totalObat = 0;
+
+    function updateTotal() {
+      const total = hargaAwal + totalObat;
+      $('#biaya_periksa').val(total);
+      $('#biaya_periksa_view').val('Rp. ' + total.toLocaleString('id-ID'));
+    }
+
     $('#editModal').on('show.bs.modal', function(event) {
       var button = $(event.relatedTarget);
       var id = button.data('id');
@@ -195,11 +214,13 @@
       modal.find('#nama').val(nama);
       modal.find('#tgl_periksa').val(tgl);
       modal.find('#catatan').val(catatan);
-      modal.find('#biaya_periksa').val(biaya);
+
+      totalObat = 0;
+      $('#listObat').empty();
+      modal.find('#biaya_periksa').val(hargaAwal);
 
       var actionUrl = '/dokter/periksa/' + id;
       modal.find('#formEditPeriksa').attr('action', actionUrl);
-      $('#listObat').empty();
     });
 
     $('#obat').on('change', function() {
@@ -211,19 +232,24 @@
 
       if ($('#obat-item-' + id).length === 0) {
         const html = `
-      <li class="list-group-item d-flex justify-content-between align-items-center" id="obat-item-${id}">
-        ${nama} (${kemasan}) - Rp. ${harga}
-        <input type="hidden" name="obats[]" value="${id}">
-        <button type="button" class="btn btn-sm btn-danger btnHapusObat" data-id="${id}">Hapus</button>
-      </li>
-    `;
+          <li class="list-group-item d-flex justify-content-between align-items-center" id="obat-item-${id}">
+            ${nama} (${kemasan}) - Rp. ${harga}
+            <input type="hidden" name="obats[]" value="${id}">
+            <button type="button" class="btn btn-sm btn-danger btnHapusObat" data-id="${id}" data-harga="${harga}">Hapus</button>
+          </li>
+        `;
         $('#listObat').append(html);
+        totalObat += harga;
+        updateTotal();
       }
     });
 
     $(document).on('click', '.btnHapusObat', function() {
       const id = $(this).data('id');
+      const harga = $(this).data('harga');
       $('#obat-item-' + id).remove();
+      totalObat -= harga;
+      updateTotal();
     });
   });
 </script>
