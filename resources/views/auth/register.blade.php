@@ -8,13 +8,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
-      background-color: #f2f7f6;
-      color: #333;
+      background-color: #e5f9e1;
       font-family: 'Roboto', sans-serif;
     }
 
     .navbar {
-      background-color: #4CAF50; /* Hijau yang lembut */
+      background-color: #38b24e;
       color: #fff;
     }
 
@@ -29,63 +28,84 @@
     }
 
     .register-box {
-      width: 400px;
+      width: 100%;
+      max-width: 380px;
       padding: 40px;
       margin: 10% auto;
       background-color: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
     .register-logo {
       text-align: center;
       font-size: 2.5rem;
       font-weight: bold;
-      color: #4CAF50;
+      color: #38b24e;
       margin-bottom: 30px;
     }
 
     .input-group-text {
-      background-color: #4CAF50;
+      background-color: #38b24e;
       color: #fff;
+      font-size: 1.1rem;
     }
 
     .form-control {
-      background-color: #f9f9f9;
+      background-color: #f1f1f1;
       border: 1px solid #ddd;
       font-size: 1rem;
+      border-radius: 10px;
+      padding: 15px;
     }
 
     .form-control:focus {
       background-color: #fff;
-      border-color: #4CAF50;
+      border-color: #38b24e;
+      box-shadow: 0 0 5px rgba(56, 178, 78, 0.5);
     }
 
     .btn-custom {
-      background-color: #4CAF50;
+      background-color: #38b24e;
       color: #fff;
-      border: 2px solid #4CAF50;
+      border: 2px solid #38b24e;
       text-transform: uppercase;
       font-weight: bold;
-      padding: 10px 30px;
+      padding: 12px 25px;
       transition: 0.3s ease;
       width: 100%;
+      border-radius: 5px;
     }
 
     .btn-custom:hover {
-      background-color: #45a049;
-      border: 2px solid #45a049;
-      box-shadow: 0 0 15px rgba(72, 186, 72, 0.8);
+      background-color: #32a44d;
+      border: 2px solid #32a44d;
+      box-shadow: 0 0 10px rgba(50, 164, 77, 0.8);
     }
 
     footer {
-      background-color: #4CAF50;
+      background-color: #38b24e;
       color: #fff;
-      padding: 30px 0;
+      padding: 20px 0;
       text-align: center;
       position: fixed;
       bottom: 0;
       width: 100%;
+      border-top: 1px solid #fff;
+    }
+
+    @media (max-width: 576px) {
+      .register-logo {
+        font-size: 2rem;
+      }
+
+      .form-control, .btn-custom {
+        font-size: 0.9rem;
+      }
+
+      .register-box {
+        padding: 25px;
+      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
@@ -101,6 +121,7 @@
 
 <!-- Register Box -->
 <div class="register-box">
+  <div class="register-logo">Medicanism</div>
   <form action="/register" method="POST">
     @csrf
     <div class="input-group mb-3">
