@@ -10,7 +10,12 @@ class DokterController extends Controller
 {
     public function index()
     {
-        return view('dokter.dashboard');
+        $showTotalPeriksa = Periksa::where('id_dokter', auth()->id())->count();
+        $sudahDitangani = Periksa::where('id_dokter', auth()->id())->whereNotNull('tgl_periksa')->count();
+        $belumDitangani = Periksa::where('id_dokter', auth()->id())->whereNull('tgl_periksa')->count();
+        $showTotalBiaya = Periksa::where('id_dokter', auth()->id())->sum('biaya_periksa');
+        $showTotalObat = Obat::count();
+        return view('dokter.dashboard', compact('showTotalPeriksa', 'sudahDitangani', 'belumDitangani', 'showTotalBiaya', 'showTotalObat'));
     }
 
     public function showPeriksa()

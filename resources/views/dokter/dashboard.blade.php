@@ -76,9 +76,9 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3>{{$showTotalObat}}</h3>
 
-              <p>Jumlah Pasien Perlu Periksa</p>
+              <p>Total Obat</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -91,9 +91,9 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>{{$showTotalPeriksa}}<sup style="font-size: 20px"></sup></h3>
 
-              <p>Jumlah Obat</p>
+              <p>Total Pasien Periksa</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -106,9 +106,9 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{$sudahDitangani}}</h3>
 
-              <p>User Registrations</p>
+              <p>Pasien sudah Periksa</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -121,9 +121,9 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{$belumDitangani}}</h3>
 
-              <p>Unique Visitors</p>
+              <p>Pasian perlu Periksa</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>

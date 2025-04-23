@@ -9,7 +9,11 @@ class PasienController extends Controller
 {
     public function index()
     {
-        return view('pasien.dashboard');
+        $showTotalPeriksa = Periksa::where('id_pasien', auth()->id())->count();
+        $sudahDitangani = Periksa::where('id_pasien', auth()->id())->whereNotNull('tgl_periksa')->count();
+        $belumDitangani = Periksa::where('id_pasien', auth()->id())->whereNull('tgl_periksa')->count();
+        $showTotalBiaya = Periksa::where('id_pasien', auth()->id())->sum('biaya_periksa');
+        return view('pasien.dashboard', compact('showTotalPeriksa', 'sudahDitangani', 'belumDitangani', 'showTotalBiaya'));
     }
 
     public function showPeriksa()

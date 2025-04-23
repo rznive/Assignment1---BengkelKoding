@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGlht9nvKMYPo-zFSAeTdQWIE4jdoF_ywKTw&s">
+  <link rel="icon" type="image/x-icon" href="{{ asset('AdminLTE-3.2.0/favicon-icon.png') }}">
   <title>{{ $title ?? 'Dashboard - Medicanism' }}</title>
 
   <!-- Google Font: Source Sans Pro -->
