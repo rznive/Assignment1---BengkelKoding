@@ -102,7 +102,7 @@
       <div class="md:flex md:items-center md:justify-between">
         <div class="md:w-1/2 mb-10 md:mb-0">
           <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Solusi Praktis<span class="text-primary"> Kesehatan Digital</span></h1>
-          <p class="text-lg text-gray-600 mb-8">Medicanism Medicanism memudahkan Anda membuat janji dengan dokter dan memungkinkan dokter untuk memeriksa serta mendiagnosis kondisi Anda secara akurat melalui platform digital kami yang lengkap.</p>
+          <p class="text-lg text-gray-600 mb-8">Medicanism memudahkan Anda membuat janji dengan dokter dan memungkinkan dokter untuk memeriksa serta mendiagnosis kondisi Anda secara akurat melalui platform digital kami yang lengkap.</p>
           <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <a href="login" class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-blue-700 text-center">Sign In</a>
             <a href="register" class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50 text-center border-primary">Sign Up</a>
